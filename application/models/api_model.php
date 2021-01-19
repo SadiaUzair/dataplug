@@ -179,7 +179,8 @@ class Api_model extends CI_Model {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
-        $query = $this->db->get_where('app_users', array('department_id' => $department_id, 'is_deleted' => '0'));
+        $query = $this->db->get_where('app_users', array('department_id' => 
+        $department_id, 'is_deleted' => '0'));
 
         $apps = array();
 
@@ -205,7 +206,9 @@ class Api_model extends CI_Model {
      */
     public function get_assigned_app_to_user($app_id) {
 
-        $this->db->select('ua.id assigned_id,a.name app_name,d.name department_name,u.id user_id,u.first_name, u.last_name, u.parent_id, u.group_id, u.default_url, u.district');
+        $this->db->select(`ua.id assigned_id,a.name app_name,d.name department_name
+        ,u.id user_id,u.first_name, u.last_name, u.parent_id, u.group_id,
+         u.default_url, u.district`);
         $this->db->from('users_app ua');
         $this->db->join('users u', 'u.id = ua.user_id', 'left');
         $this->db->join('app a', 'a.id = ua.app_id', 'left');
